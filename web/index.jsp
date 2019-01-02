@@ -1,3 +1,10 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: liuyi
+  Date: 2019-01-02
+  Time: 19:55
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -13,13 +20,14 @@
 </head>
 <body>
 <div class="header_con">
-    <div class="header">x
+    <div class="header">
         <div class="welcome fl">欢迎来到天天生鲜!</div>
         <div class="fr">
             <c:choose>
                 <c:when test="${user != null}">
                     <div class="login_info fl">
                         欢迎您：<em>${user.uname}</em>
+                        <span class="user_link"><a href="logout">注销</a></span>
                     </div>
                 </c:when>
                 <c:otherwise>
@@ -34,7 +42,7 @@
                 <span>|</span>
                 <a href="user_center_info.jsp">用户中心</a>
                 <span>|</span>
-                <a href="cart.html">我的购物车</a>
+                <a href="cart.jsp">我的购物车</a>
                 <span>|</span>
                 <a href="user_center_order.jsp">我的订单</a>
             </div>

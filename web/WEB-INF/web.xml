@@ -26,6 +26,17 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <!-- 注销 -->
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>com.ly.servlet.LogoutServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
 
     <servlet>
         <!-- 收货地址 -->
@@ -50,4 +61,23 @@
         <url-pattern>/*</url-pattern>
         <servlet-name>*</servlet-name>
     </filter-mapping>
+
+    <!--&lt;!&ndash;过滤器，设置访问权限&ndash;&gt;-->
+    <!--<filter>-->
+        <!--<filter-name>VerifyLoginFilter</filter-name>-->
+        <!--<filter-class>com.ly.fllter.VerifyLoginFilter</filter-class>-->
+    <!--</filter>-->
+
+    <!--<filter-mapping>-->
+        <!--<filter-name>VerifyLoginFilter</filter-name>-->
+        <!--<url-pattern>/user_center_order.jsp</url-pattern>-->
+        <!--<url-pattern>/user_center_info.jsp</url-pattern>-->
+        <!--<url-pattern>/user_center_site.jsp</url-pattern>-->
+        <!--<url-pattern>/cart.jsp</url-pattern>-->
+        <!--<url-pattern>/user_center_order.jsp</url-pattern>-->
+        <!--<servlet-name>AddressServlet</servlet-name>-->
+        <!--<servlet-name>UserInfoServlet</servlet-name>-->
+    <!--</filter-mapping>-->
+
+
 </web-app>

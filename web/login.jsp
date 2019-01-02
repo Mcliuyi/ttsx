@@ -31,7 +31,7 @@
                     <input type="password" name="pwd" class="pass_input" id = "pwd" placeholder="请输入密码">
                     <span class="error_tip">输入错误</span>
                     <div class="more_input clearfix">
-                        <input type="checkbox" name="remember">
+                        <input type="checkbox" name="remember" id="remember">
                         <label>记住用户名</label>
                         <a href="#">忘记密码</a>
                     </div>

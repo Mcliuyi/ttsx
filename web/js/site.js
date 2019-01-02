@@ -24,6 +24,8 @@ $(function(){
                     window.location.reload();
                 } else if (data == 4) {
                    alert("网络异常，请稍后再试");
+                }else if(data == 5){
+                    alert("详细地址长度请保持在10-50字以内");
                 }
             });
 

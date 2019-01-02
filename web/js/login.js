@@ -17,7 +17,7 @@ $(function(){
         if($(this).is(':checked'))
         {
             error_check = true;
-            $(this).siblings('span').hide();
+            //$(this).siblings('span').hide();
         }
     });
 
