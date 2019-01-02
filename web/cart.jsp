@@ -20,14 +20,20 @@
     <div class="header">
         <div class="welcome fl">欢迎来到天天生鲜!</div>
         <div class="fr">
-            <div class="login_info fl">
-                欢迎您：<em>张 山</em>
-            </div>
-            <div class="login_btn fl">
-                <a href="login.jsp">登录</a>
-                <span>|</span>
-                <a href="register.jsp">注册</a>
-            </div>
+            <c:choose>
+                <c:when test="${user != null}">
+                    <div class="login_info fl">
+                        欢迎您：<em>${user.uname}</em>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div class="login_btn fl">
+                        <a href="login.jsp">登录</a>
+                        <span>|</span>
+                        <a href="register.jsp">注册</a>
+                    </div>
+                </c:otherwise>
+            </c:choose>
             <div class="user_link fl">
                 <span>|</span>
                 <a href="user_center_info.jsp">用户中心</a>
