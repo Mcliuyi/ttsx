@@ -6,25 +6,7 @@ import com.ly.util.JDBCutil;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AddressDao {
-
-    private JDBCutil jdbCutil;
-    private ResultSet rs;
-    private String sql;
-
-    /**
-     * 初始化链接数据库
-     */
-    public AddressDao(){
-        this.jdbCutil = new JDBCutil();
-    }
-
-    /**
-     * 关闭数据库链接
-     */
-    public void close(){
-        this.jdbCutil.close();
-    }
+public class AddressDao extends BaseDao{
 
     /**
      * 根据地址id查询地址信息

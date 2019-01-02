@@ -43,38 +43,38 @@ public class AddressServlet extends HttpServlet {
             if(phone.length() != 11 || ! Config.isMobile(phone)){
                 //手机号格式不对
                 response.getWriter().println("2");
+            }else if(addr.length() > 50 || addr.length() < 5) {
+                //地址长度不符
+                response.getWriter().println("5");
             }else {
-                //修改资料
-                addressDao = new AddressDao();
-                adress = new Adress();
-                adress.setPhone(phone);
-                adress.setCode(code);
-                adress.setName(name);
-                adress.setAddr(addr);
-                try {
-                    if(addressDao.update(adress, field, user.getId())){
-                        //修改成功
-                        request.setAttribute("adress", adress);
-                        response.getWriter().println("3");
-                    }else {
-                        //修改失败
-                        response.getWriter().println("4");
+                    //修改资料
+                    addressDao = new AddressDao();
+                    adress = new Adress();
+                    adress.setPhone(phone);
+                    adress.setCode(code);
+                    adress.setName(name);
+                    adress.setAddr(addr);
+                    try {
+                        if(addressDao.update(adress, field, user.getId())){
+                            //修改成功
+                            session.setAttribute("adress", adress);
+                            response.getWriter().println("3");
+                        }else {
+                            //修改失败
+                            response.getWriter().println("4");
+                        }
+                    }catch (SQLException e){
+                        System.out.println("[ERROR:] addressServlet 修改资料");
+                        e.printStackTrace();
                     }
-                }catch (SQLException e){
-                    System.out.println("[ERROR:] addressServlet 修改资料");
-                    e.printStackTrace();
-                }
 
+                }
             }
 
 
 
         }
 
-
-
-
-    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -94,7 +94,7 @@ public class AddressServlet extends HttpServlet {
             System.out.println("[ERROR:] addressServlet 通过地址id查询对应地址失败");
             e.printStackTrace();
         }
-        request.setAttribute("adress", adress);
+        session.setAttribute("adress", adress);
 
         //重定向
        //response.sendRedirect("user_center_site.jsp");

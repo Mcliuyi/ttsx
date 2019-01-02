@@ -9,25 +9,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class UserDao {
-
-    private JDBCutil jdbCutil;
-    private ResultSet rs;
-    private String sql;
-
-    /**
-     * 初始化链接数据库
-     */
-    public UserDao(){
-        this.jdbCutil = new JDBCutil();
-    }
-
-    /**
-     * 关闭数据库链接
-     */
-    public void close(){
-        this.jdbCutil.close();
-    }
+public class UserDao extends BaseDao{
 
     /**
      * 根据id查询用户
