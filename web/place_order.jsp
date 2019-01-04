@@ -85,7 +85,7 @@
 		</ul>
 		<ul class="goods_list_td clearfix">
 			<li class="col01">1</li>			
-			<li class="col02"><img src="images/goods/goods012.jpg"></li>
+			<li class="col02"><img src="images/goods/goods12.jpg"></li>
 			<li class="col03">奇异果</li>
 			<li class="col04">500g</li>
 			<li class="col05">25.80元</li>

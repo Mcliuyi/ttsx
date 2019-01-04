@@ -66,7 +66,7 @@
 </ul>
 <ul class="cart_list_td clearfix">
     <li class="col01"><input type="checkbox" name="" checked></li>
-    <li class="col02"><img src="images/goods/goods012.jpg"></li>
+    <li class="col02"><img src="images/goods/goods12.jpg"></li>
     <li class="col03">奇异果<br><em>25.80元/500g</em></li>
     <li class="col04">500g</li>
     <li class="col05">25.80元</li>

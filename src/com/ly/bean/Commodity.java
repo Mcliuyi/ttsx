@@ -1,5 +1,7 @@
 package com.ly.bean;
 
+import com.ly.util.Config;
+
 public class Commodity {
     private int id;
     private String commodity_name;
@@ -11,7 +13,21 @@ public class Commodity {
     private int num;
     private int tid;
     private int is_del = 0;
+    private String createTime;
 
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        if (createTime == null){
+            this.createTime = Config.getTime();
+        }else {
+            this.createTime = createTime;
+        }
+
+
+    }
 
     public int getIs_del() {
         return is_del;

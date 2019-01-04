@@ -14,6 +14,7 @@ public class SetCharacterEncodingFilter implements Filter {
     }
 
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
+        System.out.println("设置编码的过滤器");
         if(this.encoding == null)
             this.encoding = "UTF-8";
             //设置请求编码

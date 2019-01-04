@@ -39,6 +39,31 @@
 
 
     <servlet>
+        <!-- 商品查询 -->
+        <servlet-name>CommodityServlet</servlet-name>
+        <servlet-class>com.ly.servlet.CommodityServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CommodityServlet</servlet-name>
+        <url-pattern>/commodity</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <!-- 商品类型查询 -->
+        <servlet-name>CommodityTypeListServlet</servlet-name>
+        <servlet-class>com.ly.servlet.CommodityTypeListServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CommodityTypeListServlet</servlet-name>
+        <url-pattern>/list</url-pattern>
+    </servlet-mapping>
+
+
+
+    <servlet>
         <!-- 收货地址 -->
         <servlet-name>AddressServlet</servlet-name>
         <servlet-class>com.ly.servlet.AddressServlet</servlet-class>
@@ -58,8 +83,19 @@
 
     <filter-mapping>
         <filter-name>setCharaterEncoding</filter-name>
-        <url-pattern>/*</url-pattern>
+        <!--<url-pattern>/*</url-pattern>-->
         <servlet-name>*</servlet-name>
+    </filter-mapping>
+
+    <!--过滤器，访问主页设置商品类型-->
+    <filter>
+        <filter-name>IndexFilter</filter-name>
+        <filter-class>com.ly.fllter.IndexFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>IndexFilter</filter-name>
+        <url-pattern>/index.jsp</url-pattern>
     </filter-mapping>
 
     <!--&lt;!&ndash;过滤器，设置访问权限&ndash;&gt;-->

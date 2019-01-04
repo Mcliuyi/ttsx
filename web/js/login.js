@@ -74,7 +74,7 @@ $(function(){
                     $('#user_name').next().html('用户不存在，请重新输入');
                     $('#user_name').next().show();
                 } else if (data == 3) {
-                    $(location).attr('href', 'index.jsp');
+                     $(location).attr('href', 'index.jsp');
                 }
             });
 

@@ -16,13 +16,15 @@ public class CommodityTypeDao extends BaseDao {
     public ArrayList<CommodityType> queryAll() throws SQLException {
         ArrayList<CommodityType> commodityTypeArrayList = new ArrayList<CommodityType>();
         CommodityType commodityType;
-        this.sql = "select id, type, is_del from commodity_type";
+        this.sql = "select id, type, is_del, className, image from commodity_type";
         this.rs = this.jdbCutil.query(this.sql);
         while (this.rs.next()){
             commodityType = new CommodityType();
             commodityType.setId(this.rs.getInt("id"));
             commodityType.setName(this.rs.getString("type"));
             commodityType.setIdDel(this.rs.getInt("is_del"));
+            commodityType.setClassName(this.rs.getString("className"));
+            commodityType.setImg(this.rs.getString("image"));
             commodityTypeArrayList.add(commodityType);
         }
         return commodityTypeArrayList;
@@ -36,10 +38,12 @@ public class CommodityTypeDao extends BaseDao {
      */
     public CommodityType query(int id) throws SQLException {
         CommodityType commodityType = new CommodityType();
-        this.sql = "select id, type, is_del from commodity_type where id=?";
+        this.sql = "select id, type, is_del, className, image from commodity_type where id=?";
         this.rs = this.jdbCutil.query(this.sql, id);
         while (this.rs.next()){
             commodityType.setName(this.rs.getString("type"));
+            commodityType.setClassName(this.rs.getString("className"));
+            commodityType.setImg(this.rs.getString("image"));
             commodityType.setId(this.rs.getInt("id"));
             commodityType.setIdDel(this.rs.getInt("is_del"));
         }
@@ -55,9 +59,22 @@ public class CommodityTypeDao extends BaseDao {
      */
     public Boolean add(CommodityType commodityType) throws SQLException {
         Boolean rlt;
-        this.sql = "insert into commodity_type(type, is_del) values(?, ?)";
-        rlt = this.jdbCutil.update(this.sql, commodityType.getName(), commodityType.getIdDel());
+        this.sql = "insert into commodity_type(type, is_del, className, image) values(?, ?)";
+        rlt = this.jdbCutil.update(this.sql, commodityType.getName(), commodityType.getIdDel(), commodityType.getClassName(), commodityType.getImg());
         return rlt;
     }
+
+    /**
+     * 修改商品类型数据
+     * @param commodityType 商品类型
+     * @return true or false
+     */
+    public Boolean update(CommodityType commodityType) throws SQLException {
+        Boolean rlt;
+        this.sql = "update commodity_type set type=?,  className=?, image=? where id = ?";
+        rlt = this.jdbCutil.update(this.sql, commodityType.getName(), commodityType.getClassName(), commodityType.getImg(), commodityType.getId());
+        return rlt;
+    }
+
 
 }

@@ -54,6 +54,7 @@ public class LoginServlet extends HttpServlet {
                     response.addCookie(uid);
                 }
                 response.getWriter().println("3");
+               // response.sendRedirect("commodityType");
                 try {
                     userDao.setEndTime(user.getId());
                 } catch (SQLException e) {
