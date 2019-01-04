@@ -46,8 +46,13 @@ public class JDBCutil {
 	public void close() {
 		
 		try {
-			this.pstat.close();
-			this.conn.close();
+			if(this.pstat != null){
+				this.pstat.close();
+			}
+			if(this.conn != null){
+				this.conn.close();
+			}
+
 		} catch (SQLException e) {
 			System.out.println("关闭链接失败");
 			e.printStackTrace();

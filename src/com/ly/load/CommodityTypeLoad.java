@@ -34,7 +34,7 @@ public class CommodityTypeLoad {
             //将类型对象的商品添加到对应的类型对象中
             for (CommodityType comm:commodityTypeArrayList) {
 
-                commodityArrayList = commodityDao.query(comm.getId(), page, num, 0, null);
+                commodityArrayList = commodityDao.query(String.valueOf(comm.getId()), page, num, 0, null, 0, null);
                 comm.setCommodityArrayList(commodityArrayList);
 
             }

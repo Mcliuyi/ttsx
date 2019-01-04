@@ -62,6 +62,18 @@
     </servlet-mapping>
 
 
+    <servlet>
+        <!-- 商品详细查询 -->
+        <servlet-name>CommodityDetailServlet</servlet-name>
+        <servlet-class>com.ly.servlet.CommodityDetailServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CommodityDetailServlet</servlet-name>
+        <url-pattern>/detail</url-pattern>
+    </servlet-mapping>
+
+
 
     <servlet>
         <!-- 收货地址 -->

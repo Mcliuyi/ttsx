@@ -8,14 +8,15 @@ import java.util.ArrayList;
 public class CommodityDao extends BaseDao{
 
     /**
-     * 通过商品id查询商品
-     * @param id 商品id
+     * 通过商品某样信息查询商品
+     * @param info 商品info
+     * @param field 查询字段
      * @return 商品实体类
      */
-    public Commodity query(String field, int id) throws SQLException {
+    public Commodity query(String field, String info) throws SQLException {
         Commodity commodity = new Commodity();
         this.sql  = "select id, commodity_name, price, unit, image, introduction, commodity_info, num, tid from commodity where " + field +  " = ? ";
-        this.rs = this.jdbCutil.query(sql, id);
+        this.rs = this.jdbCutil.query(sql, info);
         while (rs.next()){
             commodity.setId(rs.getInt("id"));
             commodity.setCommodity_name(rs.getString("commodity_name"));
@@ -32,28 +33,44 @@ public class CommodityDao extends BaseDao{
 
     /**
      * 通过商品类型id获取对应类型商品
-     * @param id 商品类型id
+     * @param fieldContent 查询内容
      * @param page 从第几个开始
      * @param num 查找多少个
      * @param sort 排序规则 0 不排序 1 升序 2降序
      * @param ruleField 排序字段
+     * @param blurry 是否模糊查询 0 否 1 是
      * @return
      * @throws SQLException
      */
-    public ArrayList<Commodity> query(int id, int page, int num, int sort, String ruleField) throws SQLException {
+    public ArrayList<Commodity> query(String fieldContent, int page, int num, int sort, String ruleField, int blurry, String blurrFiedl) throws SQLException {
         ArrayList<Commodity> commodityArrayList = new ArrayList<Commodity>();
         Commodity commodity;
-        if(sort == 0){
+        if(sort == 0 && blurry == 0){
             this.sql  = "select id, commodity_name, price, unit, image, introduction, commodity_info, num, tid, create_time from commodity where tid = ? limit ?, ?";
 
-        }else if(sort == 1){
+        }else if(sort == 1 && blurry == 0){
             this.sql  = "select id, commodity_name, price, unit, image, introduction, commodity_info, num, tid, create_time from commodity where tid = ? order by "+ ruleField + " limit ?, ?";
             //this.rs = this.jdbCutil.query(sql, id, ruleField, page, num);
-        }else if(sort == 2){
+        }else if(sort == 2  && blurry == 0 ){
             this.sql  = "select id, commodity_name, price, unit, image, introduction, commodity_info, num, tid, create_time from commodity where tid = ? order by "+ ruleField +" desc limit ?, ?";
             //this.rs = this.jdbCutil.query(sql, id, page, num);
+        }else if(sort == 0 && blurry == 1){
+            this.sql  = "select id, commodity_name, price, unit, image, introduction, commodity_info, num, tid, create_time from commodity where commodity_name like ? limit ?, ?";
+        }else if(sort == 1 && blurry == 1){
+            this.sql  = "select id, commodity_name, price, unit, image, introduction, commodity_info, num, tid, create_time from commodity where commodity_name like ? order by "+ ruleField + " limit ?, ?";
+        }else if(sort == 2 && blurry == 1){
+            this.sql  = "select id, commodity_name, price, unit, image, introduction, commodity_info, num, tid, create_time from commodity where commodity_name like ? order by "+ ruleField +" desc limit ?, ?";
         }
-        this.rs = this.jdbCutil.query(sql, id, page, num);
+        //代表查询两个最新发布的商品
+        if("0".equals(fieldContent) && blurrFiedl == null){
+            this.sql  = "select id, commodity_name, price, unit, image, introduction, commodity_info, num, tid, create_time from commodity  order by "+ ruleField +" desc limit ?, ?";
+            this.rs = this.jdbCutil.query(sql, page, num);
+        }else if(blurrFiedl == null){
+            this.rs = this.jdbCutil.query(sql, fieldContent, page, num);
+        }else {
+            this.rs = this.jdbCutil.query(sql, blurrFiedl, page, num);
+        }
+
         while (rs.next()){
             commodity = new Commodity();
             commodity.setId(rs.getInt("id"));
@@ -87,7 +104,24 @@ public class CommodityDao extends BaseDao{
             total = rs.getInt(1);
         }
         return total;
+    }
+
+    /**
+     * 模糊查询商品一共有多少数据
+     * @param blurrFiedl 约束条件
+     * @return 数量
+     * @throws SQLException
+     */
+    public int query(String blurrFiedl) throws SQLException {
+        int total = 0;
+        this.sql = "select count(*) from commodity where is_del=0 and commodity_name like ? ";
+        this.rs = this.jdbCutil.query(this.sql, blurrFiedl);
+        while (rs.next()){
+            total = rs.getInt(1);
+        }
+        return total;
     };
+
 
 
     /**

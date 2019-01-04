@@ -8,6 +8,11 @@ import java.util.ArrayList;
 
 public class CommodityTypeDao extends BaseDao {
 
+
+    public CommodityTypeDao(){
+        super();
+    }
+
     /**
      * 查询所有商品类型
      * @return 返回商品类型对象列表
@@ -38,15 +43,21 @@ public class CommodityTypeDao extends BaseDao {
      */
     public CommodityType query(int id) throws SQLException {
         CommodityType commodityType = new CommodityType();
-        this.sql = "select id, type, is_del, className, image from commodity_type where id=?";
-        this.rs = this.jdbCutil.query(this.sql, id);
-        while (this.rs.next()){
-            commodityType.setName(this.rs.getString("type"));
-            commodityType.setClassName(this.rs.getString("className"));
-            commodityType.setImg(this.rs.getString("image"));
-            commodityType.setId(this.rs.getInt("id"));
-            commodityType.setIdDel(this.rs.getInt("is_del"));
+        if(id != 0){
+            this.sql = "select id, type, is_del, className, image from commodity_type where id=?";
+            this.rs = this.jdbCutil.query(this.sql, id);
+            while (this.rs.next()){
+                commodityType.setName(this.rs.getString("type"));
+                commodityType.setClassName(this.rs.getString("className"));
+                commodityType.setImg(this.rs.getString("image"));
+                commodityType.setId(this.rs.getInt("id"));
+                commodityType.setIdDel(this.rs.getInt("is_del"));
+            }
+        }else {
+            commodityType.setName("搜索商品");
         }
+
+
 
         return commodityType;
     }

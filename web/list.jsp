@@ -42,8 +42,10 @@
 	<div class="search_bar clearfix">
 		<a href="index.jsp" class="logo fl"><img src="images/logo.png"></a>
 		<div class="search_con fl">
-			<input type="text" class="input_text fl" name="" placeholder="搜索商品">
-			<input type="button" class="input_btn fr" name="" value="搜索">
+			<form action="list" method="get">
+				<input type="text" class="input_text fl" name="blurry" placeholder="搜索商品">
+				<input type="submit" class="input_btn fr" name="" value="搜索">
+			</form>
 		</div>
 		<div class="guest_cart fr">
 			<a href="#" class="cart_name fl">我的购物车</a>
@@ -58,7 +60,7 @@
 				<span></span>			
 				<ul class="subnav">
 					<c:forEach items="${sessionScope.typeList}" var="typeName">
-						<li><a href="#model0${typeName.id}" class="${typeName.className}">${typeName.name}</a></li>
+						<li><a href="list?id=${typeName.id}" class="${typeName.className}">${typeName.name}</a></li>
 					</c:forEach>
 				</ul>
 			</div>
@@ -75,7 +77,7 @@
 	<div class="breadcrumb">
 		<a href="#">全部分类</a>
 		<span>></span>
-		<a href="#">${commodityType.name}</a>
+		<a href="#">${requestScope.commodityType.name}</a>
 	</div>
 
 	<div class="main_wrap clearfix">
@@ -103,25 +105,25 @@
                         <a href="#" class="active">默认</a>
                     </c:when>
                     <c:otherwise>
-                        <a href="list?id=${commodityType.id}&ruleField=default">默认</a>
+                        <a href="list?id=${commodityType.id}&ruleField=default&blurry=${blurryContent}">默认</a>
                     </c:otherwise>
                 </c:choose>
 
                 <c:choose>
                     <c:when test="${sessionScope.ruleField == 'price'}">
-                        <a href="list?id=${commodityType.id}&ruleField=price" class="active">价格</a>
+                        <a href="list?id=${commodityType.id}&ruleField=price&blurry=${blurryContent}" class="active">价格</a>
                     </c:when>
                     <c:otherwise>
-                        <a href="list?id=${commodityType.id}&ruleField=price" >价格</a>
+                        <a href="list?id=${commodityType.id}&ruleField=price&blurry=${blurryContent}" >价格</a>
                     </c:otherwise>
                 </c:choose>
 
                 <c:choose>
                     <c:when test="${sessionScope.ruleField == 'click_num'}">
-                        <a href="list?id=${commodityType.id}&ruleField=click_num" class="active" >人气</a>
+                        <a href="list?id=${commodityType.id}&ruleField=click_num&blurry=${blurryContent}" class="active" >人气</a>
                     </c:when>
                     <c:otherwise>
-                        <a href="list?id=${commodityType.id}&ruleField=click_num" >人气</a>
+                        <a href="list?id=${commodityType.id}&ruleField=click_num&blurry=${blurryContent}" >人气</a>
                     </c:otherwise>
                 </c:choose>
 			</div>
@@ -144,21 +146,21 @@
 
 			<div class="pagenation">
 				<c:if test="${page>1}">
-					<a href="list?id=${commodityType.id}&page=${page - 1}" id="uppage">上一页</a>
+					<a href="list?id=${commodityType.id}&page=${page - 1}&blurry=${blurryContent}" id="uppage">上一页</a>
 				</c:if>
 				<c:forEach begin="1" end="${pagenum}" var="p">
 					<c:choose>
 						<c:when test="${page == p}">
-							<a href="list?id=${commodityType.id}&page=${p}" class="active">${p}</a>
+							<a href="list?id=${commodityType.id}&page=${p}&blurry=${blurryContent}" class="active">${p}</a>
 						</c:when>
 						<c:otherwise>
-							<a href="list?id=${commodityType.id}&page=${p}">${p}</a>
+							<a href="list?id=${commodityType.id}&page=${p}&blurry=${blurryContent}">${p}</a>
 						</c:otherwise>
 					</c:choose>
 
 				</c:forEach>
 				<c:if test="${page<pagenum}">
-					<a href="list?id=${commodityType.id}&page=${page + 1}" id="onpage">下一页</a>
+					<a href="list?id=${commodityType.id}&page=${page + 1}&blurry=${blurryContent}" id="onpage">下一页</a>
 				</c:if>
 			</div>
 		</div>

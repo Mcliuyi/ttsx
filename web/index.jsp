@@ -54,8 +54,10 @@
 <div class="search_bar clearfix">
     <a href="index.jsp" class="logo fl"><img src="images/logo.png"></a>
     <div class="search_con fl">
-        <input type="text" class="input_text fl" name="" placeholder="搜索商品">
-        <input type="button" class="input_btn fr" name="" value="搜索">
+        <form action="list" method="get">
+            <input type="text" class="input_text fl" name="blurry" placeholder="搜索商品">
+            <input type="submit" class="input_btn fr" name="" value="搜索">
+        </form>
     </div>
     <div class="guest_cart fr">
         <a href="#" class="cart_name fl">我的购物车</a>
@@ -79,14 +81,9 @@
 <div class="center_con clearfix">
     <ul class="subnav fl">
         <c:forEach items="${sessionScope.typeList}" var="typeName">
-            <li><a href="#model0${typeName.id}" class="${typeName.className}">${typeName.name}</a></li>
+            <li><a href="list?id=${typeName.id}" class="${typeName.className}">${typeName.name}</a></li>
         </c:forEach>
-        <%--<li><a href="#model01" class="fruit">新鲜水果</a></li>--%>
-        <%--<li><a href="#model02" class="seafood">海鲜水产</a></li>--%>
-        <%--<li><a href="#model03" class="meet">猪牛羊肉</a></li>--%>
-        <%--<li><a href="#model04" class="egg">禽类蛋品</a></li>--%>
-        <%--<li><a href="#model05" class="vegetables">新鲜蔬菜</a></li>--%>
-        <%--<li><a href="#model06" class="ice">速冻食品</a></li>--%>
+
     </ul>
     <div class="slide fl">
         <ul class="slide_pics">
@@ -106,32 +103,32 @@
 </div>
 <c:forEach items="${sessionScope.typeList}" var="typeName">
 
-<div class="list_model">
-    <div class="list_title clearfix">
-        <h3 class="fl" id="model0${typeName.id}">${typeName.name}</h3>
-        <div class="subtitle fl">
-            <span>|</span>
-            <a href="#">鲜芒</a>
-            <a href="#">加州提子</a>
-            <a href="#">亚马逊牛油果</a>
+    <div class="list_model">
+        <div class="list_title clearfix">
+            <h3 class="fl" id="model0${typeName.id}">${typeName.name}</h3>
+            <div class="subtitle fl">
+                <span>|</span>
+                <a href="#">鲜芒</a>
+                <a href="#">加州提子</a>
+                <a href="#">亚马逊牛油果</a>
+            </div>
+            <a href="list?id=${typeName.id}" class="goods_more fr" id="fruit_more">查看更多 ></a>
         </div>
-        <a href="list?id=${typeName.id}" class="goods_more fr" id="fruit_more">查看更多 ></a>
-    </div>
 
-    <div class="goods_con clearfix">
-        <div class="goods_banner fl"><img src="${typeName.img}"></div>
-        <ul class="goods_list fl">
-            <c:forEach items="${typeName.commodityArrayList}" var="commodity">
-                <li>
-                    <h4><a href="#">${commodity.commodity_name}</a></h4>
-                    <a href="#"><img src="${commodity.img}"></a>
-                    <div class="prize">¥ ${commodity.price}</div>
-                </li>
-            </c:forEach>
+        <div class="goods_con clearfix">
+            <div class="goods_banner fl"><img src="${typeName.img}"></div>
+            <ul class="goods_list fl">
+                <c:forEach items="${typeName.commodityArrayList}" var="commodity">
+                    <li>
+                        <h4><a href="#">${commodity.commodity_name}</a></h4>
+                        <a href="#"><img src="${commodity.img}"></a>
+                        <div class="prize">¥ ${commodity.price}</div>
+                    </li>
+                </c:forEach>
 
-        </ul>
+            </ul>
+        </div>
     </div>
-</div>
 </c:forEach>
 
 <div class="footer">
