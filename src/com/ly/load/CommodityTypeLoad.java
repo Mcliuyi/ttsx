@@ -5,9 +5,11 @@ import com.ly.bean.CommodityType;
 import com.ly.dao.CommodityDao;
 import com.ly.dao.CommodityTypeDao;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -18,7 +20,7 @@ public class CommodityTypeLoad {
      * @param request
      * @param response
      */
-    public static void getGoods(HttpServletRequest request, HttpServletResponse response){
+    public static void getGoods(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
 
         ArrayList<CommodityType> commodityTypeArrayList;
         CommodityTypeDao commodityTypeDao = new CommodityTypeDao();
@@ -39,10 +41,15 @@ public class CommodityTypeLoad {
 
             }
             session.setAttribute("typeList", commodityTypeArrayList);
+            //添加购物车数量到session
+            //session.setAttribute("shopNum", 0);
             //request.getRequestDispatcher("index.jsp").forward(request,response);
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            commodityDao.close();
         }
+
 
     }
 

@@ -2,6 +2,7 @@ package com.ly.servlet;
 
 import com.ly.bean.User;
 import com.ly.dao.UserDao;
+import com.ly.load.ShopNumLoad;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -53,6 +54,9 @@ public class LoginServlet extends HttpServlet {
                     response.addCookie(userName);
                     response.addCookie(uid);
                 }
+                //加载用户购物车数量
+                ShopNumLoad shopNumLoad = new ShopNumLoad(request, response);
+                shopNumLoad.loadShopNum(user.getId());
                 response.getWriter().println("3");
                // response.sendRedirect("commodityType");
                 try {

@@ -28,6 +28,7 @@
                 <c:when test="${user != null}">
                     <div class="login_info fl">
                         欢迎您：<em>${user.uname}</em>
+                        <span>|</span>
                         <span class="user_link"><a href="logout">注销</a></span>
                     </div>
                 </c:when>
@@ -43,7 +44,7 @@
                 <span>|</span>
                 <a href="user_center_info.jsp">用户中心</a>
                 <span>|</span>
-                <a href="cart.jsp">我的购物车</a>
+                <a href="cart">我的购物车</a>
                 <span>|</span>
                 <a href="user_center_order.jsp">我的订单</a>
             </div>
@@ -60,8 +61,16 @@
         </form>
     </div>
     <div class="guest_cart fr">
-        <a href="#" class="cart_name fl">我的购物车</a>
-        <div class="goods_count fl" id="show_count">1</div>
+        <a href="cart" class="cart_name fl">我的购物车</a>
+        	<c:choose>
+        				<c:when test="${shopNum != null}">
+        					<div class="goods_count fl" id="show_count">${shopNum}</div>
+        				</c:when>
+        				<c:otherwise>
+        					<div class="goods_count fl" id="show_count">0</div>
+        				</c:otherwise>
+
+        			</c:choose>
     </div>
 </div>
 
@@ -120,8 +129,8 @@
             <ul class="goods_list fl">
                 <c:forEach items="${typeName.commodityArrayList}" var="commodity">
                     <li>
-                        <h4><a href="#">${commodity.commodity_name}</a></h4>
-                        <a href="#"><img src="${commodity.img}"></a>
+                        <h4><a href="detail?id=${commodity.id}">${commodity.commodity_name}</a></h4>
+                        <a href="detail?id=${commodity.id}"><img src="${commodity.img}"></a>
                         <div class="prize">¥ ${commodity.price}</div>
                     </li>
                 </c:forEach>

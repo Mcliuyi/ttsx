@@ -18,6 +18,8 @@
 					<c:when test="${user != null}">
 						<div class="login_info fl">
 							欢迎您：<em>${user.uname}</em>
+							<span>|</span>
+							<span class="user_link"><a href="logout">注销</a></span>
 						</div>
 					</c:when>
 					<c:otherwise>
@@ -32,7 +34,7 @@
 					<span>|</span>
 					<a href="user_center_info.jsp">用户中心</a>
 					<span>|</span>
-					<a href="cart.html">我的购物车</a>
+					<a href="cart">我的购物车</a>
 					<span>|</span>
 					<a href="user_center_order.jsp">我的订单</a>
 				</div>
@@ -47,8 +49,17 @@
 			<input type="button" class="input_btn fr" name="" value="搜索">
 		</div>
 		<div class="guest_cart fr">
-			<a href="cart.html" class="cart_name fl">我的购物车</a>
-			<div class="goods_count fl" id="show_count">1</div>
+			<a href="cart" class="cart_name fl">我的购物车</a>
+			<c:choose>
+				<c:when test="${shopNum != null}">
+					<div class="goods_count fl" id="show_count">${shopNum}</div>
+				</c:when>
+				<c:otherwise>
+					<div class="goods_count fl" id="show_count">0</div>
+				</c:otherwise>
+
+			</c:choose>
+
 		</div>
 	</div>
 
@@ -76,7 +87,7 @@
 	<div class="breadcrumb">
 		<a href="#">全部分类</a>
 		<span>></span>
-		<a href="#">${commodityType.name}</a>
+		<a href="list?id=${commodityType.id}">${commodityType.name}</a>
 		<span>></span>
 		<a href="#">商品详情</a>
 	</div>
@@ -99,10 +110,10 @@
 					<a href="javascript:;" class="minus fr">-</a>	
 				</div> 
 			</div>
-			<div class="total">总价：<em>16.80元</em></div>
+			<div class="total">总价：<em>${commodity.price}元</em></div>
 			<div class="operate_btn">
 				<a href="javascript:;" class="buy_btn">立即购买</a>
-				<a href="javascript:;" class="add_cart" id="add_cart">加入购物车</a>				
+				<a href="javascript:;" class="add_cart" id="add_cart" name="${commodity.id}">加入购物车</a>
 			</div>
 		</div>
 	</div>
@@ -157,27 +168,8 @@
 	</div>
 	<div class="add_jump"></div>
 
-	<script type="text/javascript" src="js/jquery-1.12.2.js"></script>
-	<script type="text/javascript">
-		var $add_x = $('#add_cart').offset().top;
-		var $add_y = $('#add_cart').offset().left;
-
-		var $to_x = $('#show_count').offset().top;
-		var $to_y = $('#show_count').offset().left;
-
-		$(".add_jump").css({'left':$add_y+80,'top':$add_x+10,'display':'block'})
-		$('#add_cart').click(function(){
-			$(".add_jump").stop().animate({
-				'left': $to_y+7,
-				'top': $to_x+7},
-				"fast", function() {
-					$(".add_jump").fadeOut('fast',function(){
-						$('#show_count').html(2);
-					});
-
-			});
-		})
-	</script>
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="js/addcart.js"></script>
 	
 </body>
 </html>

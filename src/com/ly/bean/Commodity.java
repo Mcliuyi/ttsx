@@ -14,6 +14,15 @@ public class Commodity {
     private int tid;
     private int is_del = 0;
     private String createTime;
+    private int click_num = 0;
+
+    public int getClick_num() {
+        return click_num;
+    }
+
+    public void setClick_num(int click_num) {
+        this.click_num = click_num;
+    }
 
     public String getCreateTime() {
         return createTime;

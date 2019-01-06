@@ -31,7 +31,7 @@
 					<span>|</span>
 					<a href="user_center_info.jsp">用户中心</a>
 					<span>|</span>
-					<a href="cart.jsp">我的购物车</a>
+					<a href="cart">我的购物车</a>
 					<span>|</span>
 					<a href="user_center_order.jsp">我的订单</a>
 				</div>
@@ -55,7 +55,7 @@
 			<dt>寄送到：</dt>
 			<dd><input type="radio" name="" checked="">北京市 海淀区 东北旺西路8号中关村软件园 （李思 收） 182****7528</dd>
 		</dl>
-		<a href="user_center_site.jsp" class="edit_site">编辑收货地址</a>
+		<a href="address" class="edit_site">编辑收货地址</a>
 
 	</div>
 	

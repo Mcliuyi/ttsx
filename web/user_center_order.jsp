@@ -14,24 +14,26 @@
 			<div class="welcome fl">欢迎来到天天生鲜!</div>
 			<div class="fr">
 				<c:choose>
-				<c:when test="${user != null}">
-					<div class="login_info fl">
-						欢迎您：<em>${user.uname}</em>
-					</div>
-				</c:when>
-				<c:otherwise>
-					<div class="login_btn fl">
-						<a href="login.jsp">登录</a>
-						<span>|</span>
-						<a href="register.jsp">注册</a>
-					</div>
-				</c:otherwise>
-			</c:choose>
+					<c:when test="${user != null}">
+						<div class="login_info fl">
+							欢迎您：<em>${user.uname}</em>
+							<span>|</span>
+							<span class="user_link"><a href="logout">注销</a></span>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="login_btn fl">
+							<a href="login.jsp">登录</a>
+							<span>|</span>
+							<a href="register.jsp">注册</a>
+						</div>
+					</c:otherwise>
+				</c:choose>
 				<div class="user_link fl">
 					<span>|</span>
 					<a href="user_center_info.jsp">用户中心</a>
 					<span>|</span>
-					<a href="cart.html">我的购物车</a>
+					<a href="cart">我的购物车</a>
 					<span>|</span>
 					<a href="user_center_order.jsp">我的订单</a>
 				</div>
@@ -54,7 +56,7 @@
 			<ul>
 				<li><a href="user_center_info.jsp">· 个人信息</a></li>
 				<li><a href="user_center_order.jsp" class="active">· 全部订单</a></li>
-				<li><a href="user_center_site.jsp">· 收货地址</a></li>
+				<li><a href="address">· 收货地址</a></li>
 			</ul>
 		</div>
 		<div class="right_content clearfix">

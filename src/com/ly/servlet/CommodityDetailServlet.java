@@ -32,7 +32,10 @@ public class CommodityDetailServlet extends HttpServlet {
             //查询商品信息
             commodity = commodityDao.query(field, id);
             request.setAttribute("commodity", commodity);
-
+            //添加点击量，每次访问加1
+            commodity.setClick_num(commodity.getClick_num() + 1);
+            //修改商品数据
+            commodityDao.update(commodity);
             //查询商品类型数据
             commodityType = commodityTypeDao.query(commodity.getTid());
             request.setAttribute("commodityType", commodityType);

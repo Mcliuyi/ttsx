@@ -73,8 +73,6 @@
         <url-pattern>/detail</url-pattern>
     </servlet-mapping>
 
-
-
     <servlet>
         <!-- 收货地址 -->
         <servlet-name>AddressServlet</servlet-name>
@@ -84,6 +82,40 @@
     <servlet-mapping>
         <servlet-name>AddressServlet</servlet-name>
         <url-pattern>/address</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <!-- 购物车 -->
+        <servlet-name>ShowShopCartServlet</servlet-name>
+        <servlet-class>com.ly.servlet.ShowShopCartServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ShowShopCartServlet</servlet-name>
+        <url-pattern>/cart</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <!-- 添加商品到购物车 -->
+        <servlet-name>AddShopCartServlet</servlet-name>
+        <servlet-class>com.ly.servlet.AddShopCartServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddShopCartServlet</servlet-name>
+        <url-pattern>/add</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <!-- 删除购物车商品 -->
+        <servlet-name>DelteShopCartServlet</servlet-name>
+        <servlet-class>com.ly.servlet.DelteShopCartServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DelteShopCartServlet</servlet-name>
+        <url-pattern>/del</url-pattern>
     </servlet-mapping>
 
 

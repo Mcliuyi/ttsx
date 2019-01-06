@@ -5,7 +5,7 @@
   Time: 15:33
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored ="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
@@ -14,6 +14,8 @@
     <title>天天生鲜-购物车</title>
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="js/cart.js"></script>
 </head>
 <body>
 <div class="header_con">
@@ -24,6 +26,8 @@
                 <c:when test="${user != null}">
                     <div class="login_info fl">
                         欢迎您：<em>${user.uname}</em>
+                        <span>|</span>
+                        <span class="user_link"><a href="logout">注销</a></span>
                     </div>
                 </c:when>
                 <c:otherwise>
@@ -38,7 +42,7 @@
                 <span>|</span>
                 <a href="user_center_info.jsp">用户中心</a>
                 <span>|</span>
-                <a href="cart.html">我的购物车</a>
+                <a href="cart">我的购物车</a>
                 <span>|</span>
                 <a href="user_center_order.jsp">我的订单</a>
             </div>
@@ -50,12 +54,14 @@
     <a href="index.jsp" class="logo fl"><img src="images/logo.png"></a>
     <div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;购物车</div>
     <div class="search_con fr">
-        <input type="text" class="input_text fl" name="" placeholder="搜索商品">
-        <input type="button" class="input_btn fr" name="" value="搜索">
+        <form action="list" method="get">
+            <input type="text" class="input_text fl" name="blurry" placeholder="搜索商品">
+            <input type="submit" class="input_btn fr" name="" value="搜索">
+        </form>
     </div>
 </div>
 
-<div class="total_count">全部商品<em>2</em>件</div>
+<div class="total_count">全部商品<em>${shopNum}</em>件</div>
 <ul class="cart_list_th clearfix">
     <li class="col01">商品名称</li>
     <li class="col02">商品单位</li>
@@ -64,45 +70,33 @@
     <li class="col05">小计</li>
     <li class="col06">操作</li>
 </ul>
-<ul class="cart_list_td clearfix">
-    <li class="col01"><input type="checkbox" name="" checked></li>
-    <li class="col02"><img src="images/goods/goods12.jpg"></li>
-    <li class="col03">奇异果<br><em>25.80元/500g</em></li>
-    <li class="col04">500g</li>
-    <li class="col05">25.80元</li>
-    <li class="col06">
-        <div class="num_add">
-            <a href="javascript:;" class="add fl">+</a>
-            <input type="text" class="num_show fl" value="1">
-            <a href="javascript:;" class="minus fl">-</a>
-        </div>
-    </li>
-    <li class="col07">25.80元</li>
-    <li class="col08"><a href="javascript:;">删除</a></li>
-</ul>
+<c:forEach items="${requestScope.commodityExtentArrayList}" var="commodityExtent">
 
-<ul class="cart_list_td clearfix">
-    <li class="col01"><input type="checkbox" name="" checked></li>
-    <li class="col02"><img src="images/goods/goods003.jpg"></li>
-    <li class="col03">大兴大棚草莓<br><em>16.80元/500g</em></li>
-    <li class="col04">500g</li>
-    <li class="col05">16.80元</li>
-    <li class="col06">
-        <div class="num_add">
-            <a href="javascript:;" class="add fl">+</a>
-            <input type="text" class="num_show fl" value="1">
-            <a href="javascript:;" class="minus fl">-</a>
-        </div>
-    </li>
-    <li class="col07">16.80元</li>
-    <li class="col08"><a href="javascript:;">删除</a></li>
-</ul>
 
+    <ul class="cart_list_td clearfix" id="${commodityExtent.commodity.id}">
+        <li class="col01"><input type="checkbox" class="checked" name="checkbox" checked></li>
+        <li class="col02"><img src="${commodityExtent.commodity.img}"></li>
+        <li class="col03">${commodityExtent.commodity.commodity_name}<br><em>${commodityExtent.commodity.price}元/${commodityExtent.commodity.unit}</em></li>
+        <li class="col04">${commodityExtent.commodity.unit}</li>
+        <li class="col05" name="sprice" >${commodityExtent.commodity.price}元</li>
+        <li class="col06">
+            <div class="num_add">
+                <a href="javascript:;" class="add fl">+</a>
+                <input type="text" class="num_show fl" value="${commodityExtent.num}">
+                <a href="javascript:;" class="minus fl">-</a>
+            </div>
+        </li>
+        <li class="col07" name="t_sprice" >${commodityExtent.commodity.price * commodityExtent.num}元</li>
+        <li class="col08"><a href="#" name="del">删除</a></li>
+    </ul>
+
+
+</c:forEach>
 
 <ul class="settlements">
-    <li class="col01"><input type="checkbox" name="" checked=""></li>
+    <li class="col01"><input type="checkbox" name="allcheck" checked=""></li>
     <li class="col02">全选</li>
-    <li class="col03">合计(不含运费)：<span>¥</span><em>42.60</em><br>共计<b>2</b>件商品</li>
+    <li class="col03">合计(不含运费)：<span>¥</span><em class="price">${requestScope.shopCart.t_price}</em><br>共计<b class="snum">${shopNum}</b>件商品</li>
     <li class="col04"><a href="place_order.jsp">去结算</a></li>
 </ul>
 
