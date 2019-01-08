@@ -44,7 +44,7 @@
                 <span>|</span>
                 <a href="cart">我的购物车</a>
                 <span>|</span>
-                <a href="user_center_order.jsp">我的订单</a>
+                <a href="order">我的订单</a>
             </div>
         </div>
     </div>
@@ -97,7 +97,7 @@
     <li class="col01"><input type="checkbox" name="allcheck" checked=""></li>
     <li class="col02">全选</li>
     <li class="col03">合计(不含运费)：<span>¥</span><em class="price">${requestScope.shopCart.t_price}</em><br>共计<b class="snum">${shopNum}</b>件商品</li>
-    <li class="col04"><a href="place_order.jsp">去结算</a></li>
+    <li class="col04"><a href="place_order.jsp" class="place_order">去结算</a></li>
 </ul>
 
 <div class="footer">

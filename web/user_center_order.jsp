@@ -35,7 +35,7 @@
 					<span>|</span>
 					<a href="cart">我的购物车</a>
 					<span>|</span>
-					<a href="user_center_order.jsp">我的订单</a>
+					<a href="order">我的订单</a>
 				</div>
 			</div>
 		</div>		
@@ -55,79 +55,79 @@
 			<h3>用户中心</h3>
 			<ul>
 				<li><a href="user_center_info.jsp">· 个人信息</a></li>
-				<li><a href="user_center_order.jsp" class="active">· 全部订单</a></li>
+				<li><a href="order" class="active">· 全部订单</a></li>
 				<li><a href="address">· 收货地址</a></li>
 			</ul>
 		</div>
 		<div class="right_content clearfix">
 				<h3 class="common_title2">全部订单</h3>
+
+			<c:forEach items="${orderArrayList}" var="order">
 				<ul class="order_list_th w978 clearfix">
-					<li class="col01">2016-8-21 17:36:24</li>
-					<li class="col02">订单号：56872934</li>
-					<li class="col02 stress">未支付</li>		
+					<li class="col01">${order.createtime}</li>
+					<li class="col02">订单号：${order.id}</li>
+					<c:choose>
+						<c:when test="${order.status == 1}">
+							<li class="col02 stress">支付</li>
+						</c:when>
+						<c:otherwise>
+							<li class="col02 stress">未支付</li>
+						</c:otherwise>
+					</c:choose>
 				</ul>
 
-				<table class="order_list_table w980">
-					<tbody>
+					<table class="order_list_table w980">
+						<tbody>
 						<tr>
 							<td width="55%">
-								<ul class="order_goods_list clearfix">					
-									<li class="col01"><img src="images/goods02.jpg"></li>
-									<li class="col02">嘎啦苹果嘎啦苹果<em>11.80元/500g</em></li>	
-									<li class="col03">1</li>
-									<li class="col04">11.80元</li>	
+					<c:forEach items="${order.commodityExtentArrayList}" var="commodityInfo">
+								<ul class="order_goods_list clearfix">
+									<li class="col01"><img src="${commodityInfo.commodity.img}"></li>
+									<li class="col02">${commodityInfo.commodity.commodity_name}<em>${commodityInfo.commodity.price}元/${commodityInfo.commodity.unit}</em></li>
+									<li class="col03">${commodityInfo.num}</li>
+									<li class="col04">${commodityInfo.num * commodityInfo.commodity.price}元</li>
 								</ul>
-								<ul class="order_goods_list clearfix">					
-									<li class="col01"><img src="images/goods02.jpg"></li>
-									<li class="col02">嘎啦苹果嘎啦苹果<em>11.80元/500g</em></li>	
-									<li class="col03">1</li>
-									<li class="col04">11.80元</li>	
-								</ul>
+					</c:forEach>
 							</td>
-							<td width="15%">33.60元</td>
-							<td width="15%">待付款</td>
-							<td width="15%"><a href="#" class="oper_btn">去付款</a></td>
+							<td width="15%">${order.price}元</td>
+							<c:choose>
+								<c:when test="${order.status == 1}">
+									<td width="15%">已付款</td>
+									<td width="15%"><a href="#" class="oper_btn">查看物流</a></td>
+								</c:when>
+								<c:otherwise>
+									<td width="15%">待付款</td>
+									<td width="15%"><a href="#" class="oper_btn">去付款</a></td>
+								</c:otherwise>
+							</c:choose>
+
 						</tr>
-					</tbody>
-				</table>
-				
-				<ul class="order_list_th w978 clearfix">
-					<li class="col01">2016-8-21 17:36:24</li>
-					<li class="col02">订单号：56872934</li>
-					<li class="col02 stress">已支付</li>			
-				</ul>
-				<table class="order_list_table w980">
-					<tbody>
-						<tr>
-							<td width="55%">
-								<ul class="order_goods_list clearfix">					
-									<li class="col01"><img src="images/goods02.jpg"></li>
-									<li class="col02">嘎啦苹果嘎啦苹果<em>11.80元/500g</em></li>	
-									<li class="col03">1</li>
-									<li class="col04">11.80元</li>	
-								</ul>
-								<ul class="order_goods_list clearfix">					
-									<li class="col01"><img src="images/goods02.jpg"></li>
-									<li class="col02">嘎啦苹果嘎啦苹果<em>11.80元/500g</em></li>	
-									<li class="col03">1</li>
-									<li class="col04">11.80元</li>	
-								</ul>
-							</td>
-							<td width="15%">33.60元</td>
-							<td width="15%">已付款</td>
-							<td width="15%"><a href="#" class="oper_btn">查看物流</a></td>
-						</tr>
-					</tbody>
-				</table>
+						</tbody>
+					</table>
+
+			</c:forEach>
+
+
+
 
 				<div class="pagenation">
-					<a href="#"><上一页</a>
-					<a href="#" class="active">1</a>
-					<a href="#">2</a>
-					<a href="#">3</a>
-					<a href="#">4</a>
-					<a href="#">5</a>
-					<a href="#">下一页></a>
+					<c:if test="${page>1}">
+						<a href="order?&page=${page - 1}" id="uppage">上一页</a>
+					</c:if>
+					<c:forEach begin="1" end="${o_page}" var="p">
+						<c:choose>
+							<c:when test="${page == p}">
+								<a href="order?page=${p}" class="active">${p}</a>
+							</c:when>
+							<c:otherwise>
+								<a href="order?page=${p}">${p}</a>
+							</c:otherwise>
+						</c:choose>
+
+					</c:forEach>
+					<c:if test="${page<o_page}">
+						<a href="order?page=${page + 1}" id="onpage">下一页</a>
+					</c:if>
 				</div>
 		</div>
 	</div>

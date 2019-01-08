@@ -125,6 +125,63 @@ public class CommodityDao extends BaseDao{
         return total;
     }
 
+    /**
+     * 查询商品信息并存入到商品扩展类
+     * @param field
+     * @param info
+     * @return
+     * @throws SQLException
+     */
+    public CommodityExtent queryExtent(String  field, String info) throws SQLException {
+        CommodityExtent commodityExtent = new CommodityExtent();
+        Commodity commodity = new Commodity();
+        this.sql  = "select id, commodity_name, price, unit, image, introduction, commodity_info, num, tid, click_num from commodity where " + field +  " = ? ";
+        this.rs = this.jdbCutil.query(sql, info);
+        while (rs.next()){
+            commodity.setId(rs.getInt("id"));
+            commodity.setCommodity_name(rs.getString("commodity_name"));
+            commodity.setPrice(rs.getDouble("price"));
+            commodity.setUnit(rs.getString("unit"));
+            commodity.setImg(rs.getString("image"));
+            commodity.setIntroduction(rs.getString("introduction"));
+            commodity.setCommodity_info(rs.getString("commodity_info"));
+            commodity.setNum(rs.getInt("num"));
+            commodity.setTid(rs.getInt("tid"));
+            commodity.setClick_num(rs.getInt("click_num"));
+            commodityExtent.setCommodity(commodity);
+        }
+
+        return commodityExtent;
+    }
+
+
+    /**
+     * 查询商品信息并存入到商品扩展类
+     * @param oid 订单id
+     * @return
+     * @throws SQLException
+     */
+    public ArrayList<CommodityExtent>  queryOrderCommodiyt(int oid) throws SQLException {
+        ArrayList<CommodityExtent> commodityExtentArrayList = new ArrayList<CommodityExtent>();
+        CommodityExtent commodityExtent = new CommodityExtent();
+        Commodity commodity = new Commodity();
+        this.sql  = "select c.id, c.commodity_name, c.price, c.unit, c.image, o.num from commodity as c inner join order_detail as o  on c.id = o.cid and o.id = ? ";
+        this.rs = this.jdbCutil.query(sql, oid);
+        while (rs.next()){
+            commodity.setId(rs.getInt("id"));
+            commodity.setCommodity_name(rs.getString("commodity_name"));
+            commodity.setPrice(rs.getDouble("price"));
+            commodity.setUnit(rs.getString("unit"));
+            commodity.setImg(rs.getString("image"));
+            commodityExtent.setNum(rs.getInt("num"));
+            commodityExtent.setCommodity(commodity);
+            commodityExtentArrayList.add(commodityExtent);
+        }
+
+        return commodityExtentArrayList;
+    }
+
+
 
     /**
      * 通过用户id查询购物车中的商品信息

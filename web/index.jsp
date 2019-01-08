@@ -46,7 +46,7 @@
                 <span>|</span>
                 <a href="cart">我的购物车</a>
                 <span>|</span>
-                <a href="user_center_order.jsp">我的订单</a>
+                <a href="order">我的订单</a>
             </div>
         </div>
     </div>

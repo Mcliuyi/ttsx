@@ -58,8 +58,8 @@
 			<h3>用户中心</h3>
 			<ul>
 				<li><a href="user_center_info.jsp">· 个人信息</a></li>
-				<li><a href="user_center_order.jsp">· 全部订单</a></li>
-				<li><a href="user_center_site.jsp" class="active">· 收货地址</a></li>
+				<li><a href="order">· 全部订单</a></li>
+				<li><a href="address" class="active">· 收货地址</a></li>
 			</ul>
 		</div>
 		<div class="right_content clearfix">

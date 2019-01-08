@@ -15,6 +15,18 @@
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
 
+
+    <servlet>
+        <!-- 验证注册时输入信息是否已经存在 -->
+        <servlet-name>VerificationUserServlet</servlet-name>
+        <servlet-class>com.ly.servlet.VerificationUserServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>VerificationUserServlet</servlet-name>
+        <url-pattern>/verUserInfo</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <!-- 登录 -->
         <servlet-name>LoginServlet</servlet-name>
@@ -116,6 +128,41 @@
     <servlet-mapping>
         <servlet-name>DelteShopCartServlet</servlet-name>
         <url-pattern>/del</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <!-- 提交订单 -->
+        <servlet-name>SettlementCommodityServlet</servlet-name>
+        <servlet-class>com.ly.servlet.SettlementCommodityServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SettlementCommodityServlet</servlet-name>
+        <url-pattern>/settlement</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <!-- 查询订信息 -->
+        <servlet-name>OrderInfoServlet</servlet-name>
+        <servlet-class>com.ly.servlet.OrderInfoServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>OrderInfoServlet</servlet-name>
+        <url-pattern>/order</url-pattern>
+    </servlet-mapping>
+
+
+
+    <servlet>
+        <!-- 付款 -->
+        <servlet-name>PaymentServlet</servlet-name>
+        <servlet-class>com.ly.servlet.PaymentServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>PaymentServlet</servlet-name>
+        <url-pattern>/scs</url-pattern>
     </servlet-mapping>
 
 

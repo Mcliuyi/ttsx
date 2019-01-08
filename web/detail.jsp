@@ -36,7 +36,7 @@
 					<span>|</span>
 					<a href="cart">我的购物车</a>
 					<span>|</span>
-					<a href="user_center_order.jsp">我的订单</a>
+					<a href="order">我的订单</a>
 				</div>
 			</div>
 		</div>		
@@ -99,18 +99,18 @@
 			<h3>${commodity.commodity_name}</h3>
 			<p>${commodity.commodity_info}</p>
 			<div class="prize_bar">
-				<span class="show_pirze">¥<em>${commodity.price}</em></span>
+				<span class="show_pirze">¥<em class="unit_price">${commodity.price}</em></span>
 				<span class="show_unit">单  位：${commodity.unit}</span>
 			</div>
 			<div class="goods_num clearfix">
 				<div class="num_name fl">数 量：</div>
 				<div class="num_add fl">
-					<input type="text" class="num_show fl" value="1">
 					<a href="javascript:;" class="add fr">+</a>
+					<input type="text" class="num_show fl" name="${commodity.id}" value="1">
 					<a href="javascript:;" class="minus fr">-</a>	
 				</div> 
 			</div>
-			<div class="total">总价：<em>${commodity.price}元</em></div>
+			<div class="total">总价：<em class="total">${commodity.price}元</em></div>
 			<div class="operate_btn">
 				<a href="javascript:;" class="buy_btn">立即购买</a>
 				<a href="javascript:;" class="add_cart" id="add_cart" name="${commodity.id}">加入购物车</a>

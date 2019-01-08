@@ -33,7 +33,7 @@
 					<span>|</span>
 					<a href="cart">我的购物车</a>
 					<span>|</span>
-					<a href="user_center_order.jsp">我的订单</a>
+					<a href="order">我的订单</a>
 				</div>
 			</div>
 		</div>		
@@ -53,7 +53,7 @@
 	<div class="common_list_con clearfix">
 		<dl>
 			<dt>寄送到：</dt>
-			<dd><input type="radio" name="" checked="">北京市 海淀区 东北旺西路8号中关村软件园 （李思 收） 182****7528</dd>
+			<dd><input type="radio" name="" checked="">${adress.addr} （${adress.name}  收） ${adress.phone}</dd>
 		</dl>
 		<a href="address" class="edit_site">编辑收货地址</a>
 
@@ -83,38 +83,34 @@
 			<li class="col04">数量</li>
 			<li class="col05">小计</li>		
 		</ul>
-		<ul class="goods_list_td clearfix">
-			<li class="col01">1</li>			
-			<li class="col02"><img src="images/goods/goods12.jpg"></li>
-			<li class="col03">奇异果</li>
-			<li class="col04">500g</li>
-			<li class="col05">25.80元</li>
-			<li class="col06">1</li>
-			<li class="col07">25.80元</li>	
-		</ul>
-		<ul class="goods_list_td clearfix">
-			<li class="col01">2</li>			
-			<li class="col02"><img src="images/goods/goods003.jpg"></li>
-			<li class="col03">大兴大棚草莓</li>
-			<li class="col04">500g</li>
-			<li class="col05">16.80元</li>
-			<li class="col06">1</li>
-			<li class="col07">16.80元</li>	
-		</ul>
+
+		<c:forEach items="${commodityExtentArrayList}" var="commodityExtent" varStatus="status">
+			<ul class="goods_list_td clearfix" name="${commodityExtent.commodity.id}">
+				<li class="col01">${status.count}</li>
+				<li class="col02"><img src="${commodityExtent.commodity.img}"></li>
+				<li class="col03">${commodityExtent.commodity.commodity_name}</li>
+				<li class="col04">${commodityExtent.commodity.unit}</li>
+				<li class="col05">${commodityExtent.commodity.price}元</li>
+				<li class="col06">${commodityExtent.num}</li>
+				<li class="col07">${commodityExtent.commodity.price * commodityExtent.num}元</li>
+			</ul>
+		</c:forEach>
+
+
 	</div>
 
 	<h3 class="common_title">总金额结算</h3>
 
 	<div class="common_list_con clearfix">
 		<div class="settle_con">
-			<div class="total_goods_count">共<em>2</em>件商品，总金额<b>42.60元</b></div>
-			<div class="transit">运费：<b>10元</b></div>
-			<div class="total_pay">实付款：<b>52.60元</b></div>
+			<div class="total_goods_count">共<em>${orderInfo.num}</em>件商品，总金额<b>${orderInfo.price}元</b></div>
+			<div class="transit">运费：<b>0元</b></div>
+			<div class="total_pay">实付款：<b>${orderInfo.price}元</b></div>
 		</div>
 	</div>
 
 	<div class="order_submit clearfix">
-		<a href="javascript:;" id="order_btn">提交订单</a>
+		<a href="scs" id="order_btn">提交订单</a>
 	</div>	
 
 	<div class="footer">
@@ -138,21 +134,7 @@
 		
 		<div class="mask"></div>
 	</div>
-	<script type="text/javascript" src="js/jquery-1.12.2.js"></script>
-	<script type="text/javascript">
-		$('#order_btn').click(function() {
-			localStorage.setItem('order_finish',2);
-
-			$('.popup_con').fadeIn('fast', function() {
-
-				setTimeout(function(){
-					$('.popup_con').fadeOut('fast',function(){
-						window.location.href = 'index.html';
-					});	
-				},3000)
-				
-			});
-		});
-	</script>
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="js/place_order.js"></script>
 </body>
 </html>

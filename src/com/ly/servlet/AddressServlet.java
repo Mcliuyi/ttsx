@@ -3,6 +3,7 @@ package com.ly.servlet;
 import com.ly.bean.Adress;
 import com.ly.bean.User;
 import com.ly.dao.AddressDao;
+import com.ly.load.AddrLoad;
 import com.ly.util.Config;
 
 import javax.servlet.ServletException;
@@ -78,22 +79,14 @@ public class AddressServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        User user;
-        Adress adress = null;
-        AddressDao addressDao = new AddressDao();
-        int addressId;
+        //加载地址信息
+        Adress adress;
         HttpSession session = request.getSession();
 
-        //获取登录用户信息
-        user = (User)session.getAttribute("user");
-        addressId = user.getAddressId();
+        AddrLoad addrLoad = new AddrLoad(request, response);
 
-        try {
-           adress = addressDao.query("id", addressId);
-        } catch (SQLException e) {
-            System.out.println("[ERROR:] addressServlet 通过地址id查询对应地址失败");
-            e.printStackTrace();
-        }
+        adress = addrLoad.queryAddr();
+
         session.setAttribute("adress", adress);
 
         //重定向

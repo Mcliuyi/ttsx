@@ -34,6 +34,7 @@ $(function(){
         {
             $('#user_name').next().hide();
             error_name = false;
+
         }
     }
 

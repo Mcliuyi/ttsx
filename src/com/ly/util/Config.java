@@ -45,7 +45,16 @@ public class Config {
         return current;
     }
 
-
+    /**
+     * 生产订单idid
+     * @return
+     */
+    public static String getOrderid(){
+        Date time = new Date(System.currentTimeMillis());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddss");
+        String current = sdf.format(time);
+        return current;
+    }
 
 
 

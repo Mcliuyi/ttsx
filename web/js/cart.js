@@ -5,14 +5,7 @@ $(function(){
     var total_num = 0;
     var total_price = 0.0;
     var len = selecteds.length;
-    var $add_x = $('#add_cart').offset().top;
-    var $add_y = $('#add_cart').offset().left;
 
-    var $to_x = $('#show_count').offset().top;
-    var $to_y = $('#show_count').offset().left;
-
-    var x = $to_x;
-    var y = $to_y;
 
     //  全选 或者取消全选
     $("[name=allcheck]").click(function () {
@@ -174,6 +167,7 @@ $(function(){
 
     }
 
+    //删除
     $("[name=del]").click(function (e) {
         e.preventDefault(); //组织默认提交事件
         var cid = $(this).parent().parent().attr("id");
@@ -191,6 +185,44 @@ $(function(){
         });
 
 
+    });
+
+
+    //提交订单
+    $(".place_order").click(function (e) {
+        e.preventDefault();
+        //获取所有已选中的商品
+        var selectGoods = $('[name=checkbox]:checked');
+        var arr = [];
+        $.each(selectGoods, function (i, item) {
+            var goodsObj = {};
+            goodsObj.id = item.parentElement.parentElement.getAttribute("id");
+            goodsObj.num = item.parentElement.parentElement.children[5].children[0].children[1].value;
+            console.log("id"+ goodsObj.id);
+            //console.log("num"+ goodsObj.num);
+            arr.push(goodsObj);
+        });
+        console.log(arr);
+        //发送post请求进行提交
+        $.ajax(
+            {
+                type:"post",
+                url : "settlement",
+                timeout:3000,
+                data:{
+                    "goodsArr": JSON.stringify(arr)
+                },
+                success: function (data) {
+                    if(data=="1"){
+                        window.location.href = "place_order.jsp";
+                    }
+
+                },
+                error: function () {
+                    alert("请求出错");
+                }
+
+            });
     });
 
 

@@ -35,7 +35,7 @@
 					<span>|</span>
 					<a href="cart">我的购物车</a>
 					<span>|</span>
-					<a href="user_center_order.jsp">我的订单</a>
+					<a href="order">我的订单</a>
 				</div>
 			</div>
 		</div>		
@@ -55,7 +55,7 @@
 			<h3>用户中心</h3>
 			<ul>
 				<li><a href="user_center_info.jsp" class="active">· 个人信息</a></li>
-				<li><a href="user_center_order.jsp">· 全部订单</a></li>
+				<li><a href="order">· 全部订单</a></li>
 				<li><a href="address">· 收货地址</a></li>
 			</ul>
 		</div>
@@ -65,6 +65,18 @@
 						<ul class="user_info_list">
 							<li><span>用户名：</span>${user.uname}</li>
 							<li><span>联系方式：</span>${user.phone}</li>
+							<li><span>邮箱：</span>${user.eamil}
+							<c:choose>
+								<c:when test="${user.status == 0}">
+									&nbsp&nbsp&nbsp<button name = "activation">激活邮箱</button>
+								</c:when>
+								<c:otherwise>
+									&nbsp&nbsp&nbsp<span>已激活</span>
+								</c:otherwise>
+							</c:choose>
+
+
+							</li>
 						</ul>
 				</div>
 				
