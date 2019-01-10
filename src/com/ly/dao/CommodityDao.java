@@ -63,6 +63,7 @@ public class CommodityDao extends BaseDao{
         }else if(sort == 2 && blurry == 1){
             this.sql  = "select id, commodity_name, price, unit, image, introduction, commodity_info, num, tid, create_time, click_num from commodity where commodity_name like ? order by "+ ruleField +" desc limit ?, ?";
         }
+
         //代表查询两个最新发布的商品
         if("0".equals(fieldContent) && blurrFiedl == null){
             this.sql  = "select id, commodity_name, price, unit, image, introduction, commodity_info, num, tid, create_time, click_num from commodity  order by "+ ruleField +" desc limit ?, ?";
@@ -101,8 +102,14 @@ public class CommodityDao extends BaseDao{
      */
     public int query(int tid) throws SQLException {
         int total = 0;
-        this.sql = "select count(*) from commodity where is_del=0 and tid = ?";
-        this.rs = this.jdbCutil.query(this.sql, tid);
+        if(tid == 0){
+            this.sql = "select count(*) from commodity where is_del=0";
+            this.rs = this.jdbCutil.query(this.sql);
+        }else {
+            this.sql = "select count(*) from commodity where is_del=0 and tid = ?";
+            this.rs = this.jdbCutil.query(this.sql, tid);
+        }
+
         while (rs.next()){
             total = rs.getInt(1);
         }
@@ -249,8 +256,6 @@ public class CommodityDao extends BaseDao{
 
         return rlt;
     }
-
-
 
 
 

@@ -7,6 +7,7 @@ import com.ly.util.JDBCutil;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class UserDao extends BaseDao{
@@ -19,7 +20,7 @@ public class UserDao extends BaseDao{
      */
     public User query(int id) throws SQLException {
         User user = new User();
-        this.sql = "select id, uname, upwd, email, phone,address_id from userInfo where id=?";
+        this.sql = "select id, uname, upwd, email, phone,address_id, isadmin from userInfo where id=?";
         this.rs = this.jdbCutil.query(this.sql, id);
 
         while (rs.next()){
@@ -29,6 +30,7 @@ public class UserDao extends BaseDao{
             user.setEamil(rs.getString("email"));
             user.setPhone(rs.getString("phone"));
             user.setAddressId(rs.getInt("address_id"));
+            user.setIsAdmin(rs.getInt("isadmin"));
         }
         return user;
     }
@@ -42,7 +44,7 @@ public class UserDao extends BaseDao{
      */
     public User query(String name) throws SQLException {
         User user = new User();
-        this.sql = "select id, uname, upwd, email, phone,address_id from userInfo where uname=?";
+        this.sql = "select id, uname, upwd, email, phone,address_id, isadmin from userInfo where uname=?";
         this.rs = this.jdbCutil.query(this.sql, name);
 
         while (rs.next()){
@@ -52,9 +54,40 @@ public class UserDao extends BaseDao{
             user.setEamil(rs.getString("email"));
             user.setPhone(rs.getString("phone"));
             user.setAddressId(rs.getInt("address_id"));
+            user.setIsAdmin(rs.getInt("isadmin"));
         }
         return user;
     }
+
+    /**
+     * 查询所有用户信息
+     * @return 用户数组
+     * @throws SQLException
+     */
+    public ArrayList<User> query() throws SQLException {
+        ArrayList<User> userArrayList = new ArrayList<User>();
+        User user;
+        this.sql = "select id, uname, upwd, email, phone, address_id, isadmin, end_time from userInfo";
+        this.rs = this.jdbCutil.query(this.sql);
+
+        while (rs.next()){
+            user = new User();
+            user.setId(rs.getInt("id"));
+            user.setUname(rs.getString("uname"));
+            user.setUpwd(rs.getString("upwd"));
+            user.setEamil(rs.getString("email"));
+            user.setPhone(rs.getString("phone"));
+            user.setAddressId(rs.getInt("address_id"));
+            user.setIsAdmin(rs.getInt("isadmin"));
+            user.setEndTime(rs.getString("end_time"));
+            userArrayList.add(user);
+        }
+        return userArrayList;
+    }
+
+
+
+
 
     /**
      * 添加用户
@@ -94,6 +127,25 @@ public class UserDao extends BaseDao{
 
          this.sql = "update userInfo set end_time = ? where id = ?";
          this.jdbCutil.update(this.sql, Config.getTime(), id);
+    }
+
+
+    /**
+     * 验证用户的密码是否正确
+     * @param upwd
+     * @param user
+     * @return
+     */
+    public Boolean verificationPwd(String upwd, User user){
+        Boolean rlt;
+        System.out.println("upwd : " + upwd + "user :" + user.getUpwd());
+        if(user.getUpwd().equals(upwd)){
+            rlt = true;
+        }else {
+            rlt = false;
+        }
+
+        return rlt;
     }
 
 

@@ -15,6 +15,8 @@ import java.util.ArrayList;
 
 public class CommodityTypeLoad {
 
+
+
     /**
      * 在加载主页前，存入商品类型和商品数据
      * @param request

@@ -73,6 +73,10 @@
         <url-pattern>/list</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>CommodityTypeListServlet</servlet-name>
+        <url-pattern>/admin/list</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <!-- 商品详细查询 -->
@@ -152,8 +156,6 @@
         <url-pattern>/order</url-pattern>
     </servlet-mapping>
 
-
-
     <servlet>
         <!-- 付款 -->
         <servlet-name>PaymentServlet</servlet-name>
@@ -166,6 +168,76 @@
     </servlet-mapping>
 
 
+    <servlet>
+        <!-- 后台登录 -->
+        <servlet-name>AdminLoginServlet</servlet-name>
+        <servlet-class>com.ly.servlet.admin.AdminLoginServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminLoginServlet</servlet-name>
+        <url-pattern>/admin/login</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <!-- 后台首页数据展示 -->
+        <servlet-name>DataStatisticsServlet</servlet-name>
+        <servlet-class>com.ly.servlet.admin.DataStatisticsServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DataStatisticsServlet</servlet-name>
+        <url-pattern>/admin/index</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <!-- 后台用户信息展示 -->
+        <servlet-name>UserManageServlet</servlet-name>
+        <servlet-class>com.ly.servlet.admin.UserManageServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UserManageServlet</servlet-name>
+        <url-pattern>/admin/user</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <!-- 添加商品 -->
+        <servlet-name>AddCommodityServlet</servlet-name>
+        <servlet-class>com.ly.servlet.admin.AddCommodityServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddCommodityServlet</servlet-name>
+        <url-pattern>/admin/add</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <!-- 修改商品信息展示 -->
+        <servlet-name>UpdateCommodityServlet</servlet-name>
+        <servlet-class>com.ly.servlet.admin.UpdateCommodityServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpdateCommodityServlet</servlet-name>
+        <url-pattern>/admin/update</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <!-- 后台用户信息展示 -->
+        <servlet-name>CommodityTypeServlet</servlet-name>
+        <servlet-class>com.ly.servlet.admin.CommodityTypeServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CommodityTypeServlet</servlet-name>
+        <url-pattern>/admin/commodityType</url-pattern>
+    </servlet-mapping>
+
     <!--过滤器，设置请求响应编码-->
     <filter>
         <filter-name>setCharaterEncoding</filter-name>
@@ -177,6 +249,7 @@
         <!--<url-pattern>/*</url-pattern>-->
         <servlet-name>*</servlet-name>
     </filter-mapping>
+
 
     <!--过滤器，访问主页设置商品类型-->
     <filter>

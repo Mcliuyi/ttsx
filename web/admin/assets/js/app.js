@@ -26,7 +26,7 @@ $(function() {
     //     }else{
     //       storageSave(saveSelectColor);
     //     }
-})
+});
 
 
 // 页面数据

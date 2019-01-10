@@ -45,6 +45,31 @@ public class Config {
         return current;
     }
 
+
+    /**
+     * 获取当前年
+     * @return
+     */
+    public static String getYear(){
+        Date time = new Date(System.currentTimeMillis());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+        String current = sdf.format(time);
+        return current;
+    }
+
+    /**
+     * 获取当前月
+     * @return
+     */
+    public static String getMonth(){
+        Date time = new Date(System.currentTimeMillis());
+        SimpleDateFormat sdf = new SimpleDateFormat("MM");
+        String current = sdf.format(time);
+        return current;
+    }
+
+
+
     /**
      * 生产订单idid
      * @return
@@ -55,6 +80,7 @@ public class Config {
         String current = sdf.format(time);
         return current;
     }
+
 
 
 

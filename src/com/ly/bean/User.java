@@ -87,8 +87,8 @@ public class User {
         return endTime;
     }
 
-    public void setEndTime() {
-        this.endTime = Config.getTime();
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
     public int getIsAdmin() {

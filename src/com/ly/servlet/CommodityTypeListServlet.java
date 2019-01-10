@@ -4,6 +4,7 @@ import com.ly.bean.Commodity;
 import com.ly.bean.CommodityType;
 import com.ly.dao.CommodityDao;
 import com.ly.dao.CommodityTypeDao;
+import com.ly.load.admin.CommodityInfoLoad;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -99,7 +100,7 @@ public class CommodityTypeListServlet extends HttpServlet {
         }
 
         try {
-
+            //System.out.println("typeid -----" + typeId);
             //查询商品信息
             commodityArrayList = commodityDao.query(typeId, (page-1)*num, num, sort, ruleField, blurry, blurrFiedl);
             request.setAttribute("commodityList", commodityArrayList);
@@ -132,6 +133,14 @@ public class CommodityTypeListServlet extends HttpServlet {
             session.setAttribute("ruleField", ruleField);
             //存入模糊查询记录，方便下一页，排序
             session.setAttribute("blurryContent", blurryContent);
+            //存入当前类型
+            request.setAttribute("type_id", typeId);
+            //查询所有商品类型
+            ArrayList<CommodityType> commodityTypeArrayList;
+            CommodityInfoLoad commodityInfoLoad = new CommodityInfoLoad(request, response);
+            commodityTypeArrayList = commodityInfoLoad.queryTye();
+            request.setAttribute("commodityTypeArrayList", commodityTypeArrayList);
+
             request.getRequestDispatcher("list.jsp").forward(request,response);
 
 
